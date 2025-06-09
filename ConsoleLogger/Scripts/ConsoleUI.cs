@@ -21,6 +21,7 @@ public class ConsoleUI : MonoBehaviour
         }
     }
 
+    public Animator Animator;
     public GameObject textEntry;
 
     public GameObject contentContianer;
@@ -29,11 +30,6 @@ public class ConsoleUI : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-    }
-
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
         ConsoleLogger.OnConsoleMessage += DisplayMessage;
     }
 
@@ -42,5 +38,12 @@ public class ConsoleUI : MonoBehaviour
         GameObject textObject = Instantiate(textEntry, contentContianer.transform);
         textObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{logString}";
         textObject.GetComponent<FullMessage>().NewFullMessage(logString, stackTrace, type);
+    }
+
+    private bool consoleState = false;
+    public void ToggleConsole()
+    {
+        consoleState = !consoleState;
+        Animator.SetBool("ConsoleState", consoleState);
     }
 }
