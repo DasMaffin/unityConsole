@@ -4,6 +4,28 @@ using TMPro;
 
 public class ConsoleLogger : MonoBehaviour
 {
+    private static ConsoleLogger _instance;
+
+    public static ConsoleLogger Instance
+    {
+        get => _instance;
+        set
+        {
+            if(_instance != null)
+            {
+                Debug.LogWarning("UnityServicesManager instance already exists. Destroying the new instance.");
+                Destroy(value.gameObject);
+            }
+            _instance = value;
+            DontDestroyOnLoad(_instance);
+        }
+    }
+
+    private void Awake()
+    {
+        Instance = this;
+    }
+
     public static event Action<string, string, LogType> OnConsoleMessage;
 
     void OnEnable()

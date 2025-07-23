@@ -24,13 +24,14 @@ public class FullMessage : MonoBehaviour, IPointerClickHandler
                 separationBar.color = new Color(1, 0.8941177f, 0.627451f, 1);
                 break;
             case LogType.Exception:
+            case LogType.Error:
                 separationBar.color = new Color(0.9607844f, 0.3411765f, 0.3843138f, 1);
                 break;
             case LogType.Assert:
                 separationBar.color = new Color(1, 1, 1, 1);
                 break;
             default:
-                throw new NotImplementedException("LogType {type} is not implemented.");
+                throw new NotImplementedException($"LogType {type} is not implemented.");
         }
     }
 
