@@ -13,7 +13,7 @@ public class ConsoleLogger : MonoBehaviour
         {
             if(_instance != null)
             {
-                Debug.LogWarning("UnityServicesManager instance already exists. Destroying the new instance.");
+                Debug.LogWarning("ConsoleLogger instance already exists. Destroying the new instance.");
                 Destroy(value.gameObject);
             }
             _instance = value;
