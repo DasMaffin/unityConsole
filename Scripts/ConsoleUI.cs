@@ -2,48 +2,52 @@ using System;
 using TMPro;
 using UnityEngine;
 
-public class ConsoleUI : MonoBehaviour
+
+namespace Maffin.RuntimeConsole
 {
-    private static ConsoleUI instance;
-    public static ConsoleUI Instance
+    public class ConsoleUI : MonoBehaviour
     {
-        get => instance;
-        set
+        private static ConsoleUI instance;
+        public static ConsoleUI Instance
         {
-            if(instance == null)
+            get => instance;
+            set
             {
-                instance = value;
-            }
-            else
-            {
-                Destroy(value.gameObject);
+                if (instance == null)
+                {
+                    instance = value;
+                }
+                else
+                {
+                    Destroy(value.gameObject);
+                }
             }
         }
-    }
 
-    public Animator Animator;
-    public GameObject textEntry;
+        public Animator Animator;
+        public GameObject textEntry;
 
-    public GameObject contentContianer;
-    public FullTraceController fullTrace;
+        public GameObject contentContianer;
+        public FullTraceController fullTrace;
 
-    private void Awake()
-    {
-        Instance = this;
-        ConsoleLogger.OnConsoleMessage += DisplayMessage;
-    }
+        private void Awake()
+        {
+            Instance = this;
+            ConsoleLogger.OnConsoleMessage += DisplayMessage;
+        }
 
-    private void DisplayMessage(string logString, string stackTrace, LogType type)
-    {
-        GameObject textObject = Instantiate(textEntry, contentContianer.transform);
-        textObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{logString}";
-        textObject.GetComponent<FullMessage>().NewFullMessage(logString, stackTrace, type);
-    }
+        private void DisplayMessage(string logString, string stackTrace, LogType type)
+        {
+            GameObject textObject = Instantiate(textEntry, contentContianer.transform);
+            textObject.GetComponentInChildren<TextMeshProUGUI>().text = $"{logString}";
+            textObject.GetComponent<FullMessage>().NewFullMessage(logString, stackTrace, type);
+        }
 
-    private bool consoleState = false;
-    public void ToggleConsole()
-    {
-        consoleState = !consoleState;
-        Animator.SetBool("ConsoleState", consoleState);
+        private bool consoleState = false;
+        public void ToggleConsole()
+        {
+            consoleState = !consoleState;
+            Animator.SetBool("ConsoleState", consoleState);
+        }
     }
 }

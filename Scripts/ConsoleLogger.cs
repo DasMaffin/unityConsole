@@ -2,44 +2,47 @@ using UnityEngine;
 using System;
 using TMPro;
 
-public class ConsoleLogger : MonoBehaviour
+namespace Maffin.RuntimeConsole
 {
-    private static ConsoleLogger _instance;
-
-    public static ConsoleLogger Instance
+    public class ConsoleLogger : MonoBehaviour
     {
-        get => _instance;
-        set
+        private static ConsoleLogger _instance;
+
+        public static ConsoleLogger Instance
         {
-            if(_instance != null)
+            get => _instance;
+            set
             {
-                Debug.LogWarning("ConsoleLogger instance already exists. Destroying the new instance.");
-                Destroy(value.gameObject);
+                if (_instance != null)
+                {
+                    Debug.LogWarning("ConsoleLogger instance already exists. Destroying the new instance.");
+                    Destroy(value.gameObject);
+                }
+                _instance = value;
+                DontDestroyOnLoad(_instance);
             }
-            _instance = value;
-            DontDestroyOnLoad(_instance);
         }
-    }
 
-    private void Awake()
-    {
-        Instance = this;
-    }
+        private void Awake()
+        {
+            Instance = this;
+        }
 
-    public static event Action<string, string, LogType> OnConsoleMessage;
+        public static event Action<string, string, LogType> OnConsoleMessage;
 
-    void OnEnable()
-    {
-        Application.logMessageReceived += HandleLog;
-    }
+        void OnEnable()
+        {
+            Application.logMessageReceived += HandleLog;
+        }
 
-    void OnDisable()
-    {
-        Application.logMessageReceived -= HandleLog;
-    }
+        void OnDisable()
+        {
+            Application.logMessageReceived -= HandleLog;
+        }
 
-    void HandleLog(string logString, string stackTrace, LogType type)
-    {
-        OnConsoleMessage?.Invoke(logString, stackTrace, type);
+        void HandleLog(string logString, string stackTrace, LogType type)
+        {
+            OnConsoleMessage?.Invoke(logString, stackTrace, type);
+        }
     }
 }

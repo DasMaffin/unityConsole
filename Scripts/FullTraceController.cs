@@ -1,35 +1,38 @@
 using TMPro;
 using UnityEngine;
 
-public class FullTraceController : MonoBehaviour
+namespace Maffin.RuntimeConsole
 {
-    public string fullTraceTitleString = "No trace available.";
-    public string fullTraceTextString = "No trace available.";
-
-    public TextMeshProUGUI fullTraceTitle;
-    public TextMeshProUGUI fullTraceText;
-
-    public void OpenNewFullTrace(string fullTraceTitleString, string fullTraceTextString)
+    public class FullTraceController : MonoBehaviour
     {
-        this.fullTraceTitleString = fullTraceTitleString;
-        this.fullTraceTextString = fullTraceTextString;
+        public string fullTraceTitleString = "No trace available.";
+        public string fullTraceTextString = "No trace available.";
 
-        OnEnable();
-    }
+        public TextMeshProUGUI fullTraceTitle;
+        public TextMeshProUGUI fullTraceText;
 
-    private void Start()
-    {
-        CloseFullTrace();
-    }
+        public void OpenNewFullTrace(string fullTraceTitleString, string fullTraceTextString)
+        {
+            this.fullTraceTitleString = fullTraceTitleString;
+            this.fullTraceTextString = fullTraceTextString;
 
-    private void OnEnable()
-    {
-        fullTraceTitle.text = fullTraceTitleString;
-        fullTraceText.text = fullTraceTextString;
-    }
+            OnEnable();
+        }
 
-    public void CloseFullTrace()
-    {
-        gameObject.SetActive(false);
+        private void Start()
+        {
+            CloseFullTrace();
+        }
+
+        private void OnEnable()
+        {
+            fullTraceTitle.text = fullTraceTitleString;
+            fullTraceText.text = fullTraceTextString;
+        }
+
+        public void CloseFullTrace()
+        {
+            gameObject.SetActive(false);
+        }
     }
 }

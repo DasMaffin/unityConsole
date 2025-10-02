@@ -1,21 +1,24 @@
 using TMPro;
 using UnityEngine;
 
-public class CommandHandler : MonoBehaviour
+namespace Maffin.RuntimeConsole
 {
-    TMP_InputField inputField;
-
-    private void Awake()
+    public class CommandHandler : MonoBehaviour
     {
-        inputField = GetComponent<TMP_InputField>();
-    }
+        TMP_InputField inputField;
 
-    public void OnSubmit(string text)
-    {
-        if (!string.IsNullOrWhiteSpace(text))
+        private void Awake()
         {
-            CommandCenter.Execute(text);
-            inputField.text = "";
+            inputField = GetComponent<TMP_InputField>();
+        }
+
+        public void OnSubmit(string text)
+        {
+            if (!string.IsNullOrWhiteSpace(text))
+            {
+                CommandCenter.Execute(text);
+                inputField.text = "";
+            }
         }
     }
 }
