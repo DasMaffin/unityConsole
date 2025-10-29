@@ -2,7 +2,6 @@ using System;
 using TMPro;
 using UnityEngine;
 
-
 namespace Maffin.RuntimeConsole
 {
     public class ConsoleUI : MonoBehaviour
@@ -44,7 +43,8 @@ namespace Maffin.RuntimeConsole
         }
 
         private bool consoleState = false;
-        public void ToggleConsole()
+        public void ToggleConsole() => ToggleConsole(null);
+        public void ToggleConsole(string[] value)
         {
             consoleState = !consoleState;
             Animator.SetBool("ConsoleState", consoleState);

@@ -5,4 +5,5 @@ To add commands register them with the provided CommandCenter.AddCommand(string,
 
 Check out the Prefabs/ExampleCommandManager for an example of how you may implement a new command. You can drag and drop the asset into the scene anywhere and then use the commands 'dance' and 'close console'. Check out Scripts/ExampleCommandManager for the example script.
 
-Test
+How to use arguments:
+Every method call comes with a string[]. Entries are separated by space when typing into the console. Use this to handle any arguments. 
